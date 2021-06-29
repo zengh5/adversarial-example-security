@@ -1,0 +1,4 @@
+Verified in: 
+eagerpy 0.29
+pytorch 1.5.1
+scikit-image 0.17.2
