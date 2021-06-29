@@ -20,7 +20,7 @@ fea       = SRM34671(sourcefile);
 
 % 4 Classify the features with a pre-trained ensemble classifier
 test_results = ensemble_testing(fea,trained_ensemble)
-%% test_results: the classification results of N sub classifiers, here N=51 
+%% test_results: the classification results of N sub classifiers, here N=51
 %% We do not use the 'prediction' variable directly as that done in steganalysis
 if test_results.votes <= threshold
     disp('The image is benign'),
