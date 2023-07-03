@@ -18,7 +18,7 @@ import numpy as np
 import cv2
 import torch
 import torch.nn as nn
-from skimage.measure.simple_metrics import compare_psnr
+
 
 def weights_init_kaiming(lyr):
 	r"""Initializes weights of the model according to the "He" initialization
@@ -38,24 +38,6 @@ def weights_init_kaiming(lyr):
 			clamp_(-0.025, 0.025)
 		nn.init.constant(lyr.bias.data, 0.0)
 
-def batch_psnr(img, imclean, data_range):
-	r"""
-	Computes the PSNR along the batch dimension (not pixel-wise)
-
-	Args:
-		img: a `torch.Tensor` containing the restored image
-		imclean: a `torch.Tensor` containing the reference image
-		data_range: The data range of the input image (distance between
-			minimum and maximum possible values). By default, this is estimated
-			from the image data-type.
-	"""
-	img_cpu = img.data.cpu().numpy().astype(np.float32)
-	imgclean = imclean.data.cpu().numpy().astype(np.float32)
-	psnr = 0
-	for i in range(img_cpu.shape[0]):
-		psnr += compare_psnr(imgclean[i, :, :, :], img_cpu[i, :, :, :], \
-					   data_range=data_range)
-	return psnr/img_cpu.shape[0]
 
 def data_augmentation(image, mode):
 	r"""Performs dat augmentation of the input image
